@@ -1,0 +1,21 @@
+{
+  "name": "svelte-links-spizder",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+    "sass": "^1.52.2",
+    "svelte": "^3.44.0",
+    "svelte-preprocess": "^4.10.7",
+    "vite": "^2.9.9"
+  },
+  "dependencies": {
+    "@medv/finder": "^2.1.0",
+    "csv-stringify": "^6.1.0",
+    "element-picker": "^1.0.1"
+  }
+}
