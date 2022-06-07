@@ -1,4 +1,5 @@
 import App from './App.svelte'
+import './assets/manifest.json';
 
 const target = document.createElement('div')
 

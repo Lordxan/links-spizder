@@ -3,7 +3,7 @@
   "name": "Page dumper",
   "manifest_version": 3,
   "version": "0.1",
-  "description": "Ozon671 inc proudly presents \"Page dumper\" 0.1",
+  "description": "Ozon671 inc proudly presents \"Page dumper\"",
   "content_scripts": [
     {
       "matches": [

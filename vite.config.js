@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
+import manifestTransformPlugin from './plugins/manifestTransformPlugin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svelte()],
+  plugins: [svelte(), manifestTransformPlugin()],
   build: {
     assetsInlineLimit: Math.pow(1024, 2),
     minify: 'terser',
