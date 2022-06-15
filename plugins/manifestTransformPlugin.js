@@ -7,6 +7,7 @@ const FILE_REGEX = /manifest.json$/
 
 export default function manifestTransformPlugin() {
   return {
+    apply: 'build',
     name: 'manifest-transform',
     load(filePath) {
       if (FILE_REGEX.test(filePath)) {

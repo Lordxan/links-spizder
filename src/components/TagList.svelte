@@ -3,9 +3,10 @@
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   export let items = [];
+  let innerHeight;
 </script>
 
-<div class="list">
+<div class="list" style="max-height: {innerHeight - 200}px;">
   {#each items as item, index}
     <TagItem
       {item}
@@ -13,6 +14,8 @@
     />
   {/each}
 </div>
+
+<svelte:window bind:innerHeight />
 
 <style lang="scss">
   .list {

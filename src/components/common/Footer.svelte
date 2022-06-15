@@ -1,20 +1,27 @@
 <script>
-  import ozon from "../assets/ozoninc-lo.png";
+  import ozon from "@/assets/ozoninc-lo.png";
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
 </script>
 
-<div class="header">
+<div class="footer">
   Powered by:
-  <div class="header__logo" style="background-image: url({ozon});" />
+  <i
+    class="footer__logo"
+    style="background-image: url({ozon});"
+    on:click={() => dispatch("click")}
+  />
 </div>
 
 <style lang="scss">
-  .header {
+  .footer {
     flex-direction: row;
     display: flex;
     justify-content: end;
     align-items: center;
     padding: 10px;
     &__logo {
+      display: block;
       margin-left: 4px;
       width: 100px;
       height: 22px;
@@ -23,6 +30,7 @@
       background-size: contain;
       background-color: rgb(48, 48, 48);
       border-radius: 4px;
+      cursor: pointer;
     }
   }
 </style>

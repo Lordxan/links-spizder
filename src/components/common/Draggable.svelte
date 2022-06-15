@@ -34,7 +34,6 @@
   $zindex: 2147483647;
   .draggable {
     user-select: none;
-    border: dotted 1px gray;
     position: fixed;
     z-index: $zindex;
   }
