@@ -10,7 +10,9 @@
   {#each items as item, index}
     <TagItem
       {item}
-      on:updated={({ detail: field }) => dispatch("updated", { field, index })}
+      topLevel={true}
+      on:changeRoot={({ detail: item }) =>
+        dispatch("changeRoot", { item, index })}
     />
   {/each}
 </div>

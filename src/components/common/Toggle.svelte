@@ -1,5 +1,6 @@
 <script>
   import ozon from "@/assets/ozon.webp";
+  import ozonStatic from "@/assets/ozon-static.webp";
   import { createEventDispatcher } from "svelte";
   export let style = "";
   const dispatch = createEventDispatcher();
@@ -8,7 +9,7 @@
 <div class="toggle" {style}>
   <i
     class="toggle__icon"
-    style="background-image: url({ozon})"
+    style="--ozon: url({ozon}); --ozon-static: url({ozonStatic});"
     on:click={() => dispatch("toggle")}
   />
 </div>
@@ -34,6 +35,10 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
+      background-image: var(--ozon-static);
+      &:hover {
+        background-image: var(--ozon);
+      }
     }
   }
 </style>

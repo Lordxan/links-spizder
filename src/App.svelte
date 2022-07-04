@@ -8,9 +8,10 @@
   import Footer from "./components/common/Footer.svelte";
   import { stringify } from "csv-stringify/browser/esm/sync";
   import Toggle from "./components/common/Toggle.svelte";
+  import { fieldValues } from "./components/store";
   let items = [];
   let toggle = false;
-  $: itemsCSV = Array(items.length);
+  $: itemsCSV = fieldValues;
   function handleShit(element) {
     const result = finder(element).replace(/:nth-child\(\d+\)/, "");
     items = Array.from(document.querySelectorAll(result));
@@ -24,7 +25,9 @@
   function exportCSV() {
     console.log(itemsCSV);
     const output = stringify(
-      itemsCSV.map(({ value, nodeName }) => ({ nodeName, value }))
+      Object.values(itemsCSV)
+        .filter(({ value: v }) => v)
+        .map(({ value, nodeName }) => ({ nodeName, value }))
     );
     const file = new Blob([output]);
     const uri = URL.createObjectURL(file);
@@ -35,8 +38,22 @@
     link.click();
     link.remove();
   }
-  function toggleTool(params) {
+  async function openLinks() {
+    console.log(itemsCSV);
+    const output = Object.values(itemsCSV)
+      .filter(({ value: v }) => v)
+      .map(({ value }) => value);
+    for (const value of output) {
+      await delay(100);
+      window.open(value);
+    }
+  }
+  function toggleTool() {
     toggle = !toggle;
+  }
+  function changeRoot({ item, index }) {
+    items[index] = item;
+    itemsCSV[index] = item;
   }
 </script>
 
@@ -46,11 +63,8 @@
   {:else}
     <div class="app">
       <Header on:click={toggleTool} />
-      <Toolbar on:select={select} on:export={exportCSV} />
-      <TagList
-        {items}
-        on:updated={({ detail: d }) => (itemsCSV[d.index] = d.field)}
-      />
+      <Toolbar on:select={select} on:export={exportCSV} on:open={openLinks} />
+      <TagList {items} on:changeRoot={({ detail: item }) => changeRoot(item)} />
       <Footer />
     </div>
   {/if}
