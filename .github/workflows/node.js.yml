@@ -3,21 +3,19 @@
 
 name: Node.js CI
 
-on:
+on: 
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+    - '*'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
     strategy:
       matrix:
         node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
@@ -29,11 +27,8 @@ jobs:
     - run: sudo apt-get -y install p7zip-full
     - run: npm ci
     - run: npm run build --if-present
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.0
+    - run: cd dist && 7z a ext.zip .
+    - uses: ncipollo/release-action@v1
       with:
-        # Artifact name
-        name: 'ext'
-        # A file, directory or wildcard pattern that describes what to upload
-        path: './dist/*'
+        artifacts: "target/release/selector_grabber"
 
